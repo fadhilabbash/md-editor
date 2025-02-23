@@ -3,7 +3,7 @@ import Tiptap from "@/components/tiptap";
 import { useState } from "react";
 
 const ParentComponent = () => {
-  const [content, setContent] = useState<string>("# السلام عليكم");
+  const [content, setContent] = useState<string>("");
 
   const handleEditorChange = (newContent: string) => {
     setContent(newContent); // This will update the content in the parent component
