@@ -5,7 +5,6 @@ import StarterKit from "@tiptap/starter-kit";
 import { Markdown } from "tiptap-markdown";
 import Typography from "@tiptap/extension-typography";
 import TextAlign from "@tiptap/extension-text-align";
-import Placeholder from "@tiptap/extension-placeholder";
 import MenuBar from "./menu-bar";
 
 type TiptapProps = {
@@ -20,9 +19,6 @@ const Tiptap = ({ onChange, initialContent }: TiptapProps) => {
       Typography,
       TextAlign.configure({
         types: ["heading", "paragraph"],
-      }),
-      Placeholder.configure({
-        placeholder: "Start typing here...",
       }),
     ],
     content: initialContent,
