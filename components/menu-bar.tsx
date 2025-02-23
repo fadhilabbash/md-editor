@@ -11,8 +11,13 @@ import {
   AlignCenter,
   AlignRight,
   AlignJustify,
+  Code,
+  Quote,
+  ListOrdered,
+  List,
 } from "lucide-react";
 import { Editor } from "@tiptap/react";
+import { Separator } from "@/components/ui/separator";
 
 interface MenuBarProps {
   editor: Editor | null;
@@ -24,6 +29,68 @@ const MenuBar = ({ editor }: MenuBarProps) => {
   return (
     <div className="flex items-start mb-2">
       <ToggleGroup type="multiple" className="flex gap-1 ">
+      <ToggleGroupItem
+          value="blockquote"
+          onClick={() => editor?.chain().focus().toggleBlockquote().run()}
+          aria-label="Blockquote"
+          variant="outline"
+        >
+          <Quote className="w-5 h-5" />
+        </ToggleGroupItem>
+        <ToggleGroupItem
+          value="code"
+          onClick={() => editor?.chain().focus().toggleCode().run()}
+          aria-label="Code"
+          variant="outline"
+        >
+          <Code className="w-5 h-5" />
+        </ToggleGroupItem>
+        <Separator orientation="vertical" className="h-8 m-2 " />
+        
+        <ToggleGroupItem
+          value="unordered-list"
+          onClick={() => editor?.chain().focus().toggleBulletList().run()}
+          aria-label="Unordered List"
+          variant="outline"
+        >
+          <List className="w-5 h-5" />
+        </ToggleGroupItem>
+        <ToggleGroupItem
+          value="ordered-list"
+          onClick={() => editor?.chain().focus().toggleOrderedList().run()}
+          aria-label="Ordered List"
+          variant="outline"
+        >
+          <ListOrdered className="w-5 h-5" />
+        </ToggleGroupItem> 
+        <Separator orientation="vertical" className="h-8 m-2 " />
+        <ToggleGroupItem
+          value="bold"
+          onClick={() => editor?.chain().focus().toggleBold().run()}
+          aria-label="Bold"
+          variant="outline"
+        >
+          <Bold className="w-5 h-5" />
+        </ToggleGroupItem>
+        <ToggleGroupItem
+          value="italic"
+          onClick={() => editor?.chain().focus().toggleItalic().run()}
+          aria-label="Italic"
+          variant="outline"
+        >
+          <Italic className="w-5 h-5" />
+        </ToggleGroupItem>
+        <ToggleGroupItem
+          value="strike"
+          onClick={() => editor?.chain().focus().toggleStrike().run()}
+          aria-label="Strike"
+          variant="outline"
+        >
+          <Strikethrough className="w-5 h-5" />
+        </ToggleGroupItem>
+       
+        <Separator orientation="vertical" className="h-8 m-2 " />
+       
         <ToggleGroupItem
           value="h1"
           onClick={() =>
@@ -54,30 +121,9 @@ const MenuBar = ({ editor }: MenuBarProps) => {
         >
           <Heading3 className="w-5 h-5" />
         </ToggleGroupItem>
-        <ToggleGroupItem
-          value="bold"
-          onClick={() => editor?.chain().focus().toggleBold().run()}
-          aria-label="Bold"
-          variant="outline"
-        >
-          <Bold className="w-5 h-5" />
-        </ToggleGroupItem>
-        <ToggleGroupItem
-          value="italic"
-          onClick={() => editor?.chain().focus().toggleItalic().run()}
-          aria-label="Italic"
-          variant="outline"
-        >
-          <Italic className="w-5 h-5" />
-        </ToggleGroupItem>
-        <ToggleGroupItem
-          value="strike"
-          onClick={() => editor?.chain().focus().toggleStrike().run()}
-          aria-label="Strike"
-          variant="outline"
-        >
-          <Strikethrough className="w-5 h-5" />
-        </ToggleGroupItem>
+       
+
+        <Separator orientation="vertical" className="h-8 m-2 " />
         <ToggleGroupItem
           value="left"
           onClick={() => editor?.chain().focus().setTextAlign("left").run()}
@@ -115,3 +161,8 @@ const MenuBar = ({ editor }: MenuBarProps) => {
   );
 };
 export default MenuBar;
+
+
+
+
+ 

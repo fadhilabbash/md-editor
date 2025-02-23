@@ -3,6 +3,7 @@
 import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import { Markdown } from "tiptap-markdown";
+import Highlight from "@tiptap/extension-highlight";
 import Typography from "@tiptap/extension-typography";
 import TextAlign from "@tiptap/extension-text-align";
 import MenuBar from "./menu-bar";
@@ -16,6 +17,7 @@ const Tiptap = ({ onChange, initialContent }: TiptapProps) => {
     extensions: [
       StarterKit,
       Markdown,
+      Highlight,
       Typography,
       TextAlign.configure({
         types: ["heading", "paragraph"],
@@ -28,7 +30,7 @@ const Tiptap = ({ onChange, initialContent }: TiptapProps) => {
     editorProps: {
       attributes: {
         class:
-          "prose max-h-[200px] min-h-[200px] cursor-text rounded-xl border p-4 ring-offset-background focus-within:outline-none focus-within:ring-2 focus-within:ring-ring overflow-y-auto",
+          "prose lg:prose-xl max-h-[200px] min-h-[200px] cursor-text rounded-xl border p-4 ring-offset-background focus-within:outline-none focus-within:ring-2 focus-within:ring-ring  overflow-y-auto",
       },
     },
     immediatelyRender: false,
