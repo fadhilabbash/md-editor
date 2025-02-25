@@ -1,26 +1,48 @@
 "use client";
-import Tiptap from "@/components/tiptap-markdown";
-import { useState } from "react";
+import TiptapMarkdown from "@/components/tiptap-markdown";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import React, { useState } from "react";
 
-const ParentComponent = () => {
-  const [content, setContent] = useState<string>("");
+const FormComponent = () => {
+  const [content, setContent] = useState("");
+  const [error, setError] = useState<string>("");
 
-  const handleEditorChange = (newContent: string) => {
-    setContent(newContent);
-    console.log("Updated Content: ", newContent);
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (!content.trim()) {
+      setError("هذا الحقل مطلوب");
+      return;
+    }
+    setError("");
+
+    console.log("Form submitted with content:", content);
   };
 
   return (
-    <div className="container mx-auto  mt-8 items-center justify-center flex flex-col w-full">
-      <div>
-        <Tiptap onChange={handleEditorChange} initialContent={content} />
-      </div>
-      <div className="my-2">
-        <h3>المحتوى الحقيقي</h3>
-        <pre>{content}</pre>
-      </div>
+    <div className="container mx-auto items-center flex justify-center mt-8">
+      <form onSubmit={handleSubmit}>
+        <div className="grid w-full items-center gap-1.5">
+          <Label htmlFor="title">العنوان</Label>
+          <Input type="email" id="title" placeholder="العنوان" />
+        </div>
+
+        <div>
+          <Label htmlFor="content">النص</Label>
+          <TiptapMarkdown onChange={(newContent) => setContent(newContent)} />
+
+          <div className="text-[12px] text-destructive">
+            {error && <p className="destruct">{error}</p>}
+          </div>
+        </div>
+        <div className="mt-4">
+          <Button type="submit">Submit</Button>
+        </div>
+      </form>
     </div>
   );
 };
 
-export default ParentComponent;
+export default FormComponent;
