@@ -11,9 +11,9 @@ import Highlight from "./tiptap-markdown/extensions/highlight";
 
 type TiptapProps = {
   onChange: (content: string) => void;
-  initialContent?: string;
+  value?: string;
 };
-const TiptapMarkdown = ({ onChange, initialContent }: TiptapProps) => {
+const TiptapMarkdown = ({ onChange, value }: TiptapProps) => {
   const editor = useEditor({
     extensions: [
       StarterKit,
@@ -24,7 +24,7 @@ const TiptapMarkdown = ({ onChange, initialContent }: TiptapProps) => {
         types: ["heading", "paragraph"],
       }),
     ],
-    content: initialContent,
+    content: value,
     onUpdate: ({ editor }) => {
       onChange(editor?.storage.markdown.getMarkdown());
     },
@@ -40,7 +40,7 @@ const TiptapMarkdown = ({ onChange, initialContent }: TiptapProps) => {
   return (
     <div className="border p-2 w-fit rounded-xl">
       <MenuBar editor={editor} />
-      <EditorContent editor={editor} />
+      <EditorContent editor={editor}/>
     </div>
   );
 };

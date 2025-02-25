@@ -3,20 +3,20 @@ import TiptapMarkdown from "@/components/tiptap-markdown";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import React, { useActionState, useState } from "react";
-import { useForm } from "@conform-to/react";
+import React, { useActionState } from "react";
+import { useForm, useInputControl } from "@conform-to/react";
 import { parseWithZod } from "@conform-to/zod";
 
 import { addBlog } from "@/services/actions/blog-action";
 import { blogSchema } from "@/lib/schemas";
 import { Loader2 } from "lucide-react";
 import { Textarea } from "./ui/textarea";
+
 const AddBlog = () => {
   const [lastResult, formAction, isPending] = useActionState(
     addBlog,
     undefined
   );
-  const [content, setContent] = useState("");
 
   const [form, fields] = useForm({
     lastResult,
@@ -27,8 +27,10 @@ const AddBlog = () => {
     shouldRevalidate: "onInput",
   });
 
+  const contentControl = useInputControl(fields.content);
+
   return (
-    <div className="container mx-auto items-center flex justify-center mt-8">
+    <div className="container mx-auto flex justify-center mt-8">
       <form
         id={form.id}
         onSubmit={form.onSubmit}
@@ -38,7 +40,7 @@ const AddBlog = () => {
         <div className="grid w-full items-center gap-1.5">
           <Label htmlFor="title">العنوان</Label>
           <Input
-            type="title"
+            type="text"
             id="title"
             placeholder="العنوان"
             key={fields.title.key}
@@ -49,23 +51,26 @@ const AddBlog = () => {
           </div>
         </div>
 
-        <div>
+        <>
           <Textarea
             id="content"
-            key={fields.content.key}
             name={fields.content.name}
-            defaultValue={content}
-           className="hidden"
-           
+            defaultValue={fields.content.initialValue}
+            className="sr-only"
+            tabIndex={-1}
           />
-        </div>
-        <div>
-          <Label htmlFor="content">النص</Label>
-          <TiptapMarkdown onChange={(newContent) => setContent(newContent)} />
-          <div className="text-[12px] text-destructive">
-            {fields.content.errors}
+          <div className="grid w-full items-center gap-1.5">
+            <Label htmlFor="content">النص</Label>
+            <TiptapMarkdown
+              value={contentControl.value}
+              onChange={contentControl.change}
+            />
+            <div className="text-[12px] text-destructive">
+              {fields.content.errors}
+            </div>
           </div>
-        </div>
+        </>
+
         <div className="mt-4">
           <Button type="submit" disabled={isPending} className="ml-2 mt-2">
             {isPending ? (
