@@ -30,7 +30,7 @@ const Tiptap = ({ onChange, initialContent }: TiptapProps) => {
     editorProps: {
       attributes: {
         class:
-          "prose lg:prose-xl max-h-[200px] min-h-[200px] cursor-text rounded-xl border p-4 ring-offset-background focus-within:outline-none focus-within:ring-2 focus-within:ring-ring  overflow-y-auto",
+          "prose prose-sm sm:prose lg:prose-lg xl:prose-2xl mx-auto  max-h-[200px] min-h-[200px] cursor-text rounded-xl border p-4 ring-offset-background focus-within:outline-none focus-within:ring-2 focus-within:ring-ring  overflow-y-auto",
       },
     },
     immediatelyRender: false,
@@ -39,7 +39,7 @@ const Tiptap = ({ onChange, initialContent }: TiptapProps) => {
   return (
     <div className="border p-2 w-fit rounded-xl">
       <MenuBar editor={editor} />
-      <EditorContent editor={editor} />
+      <EditorContent editor={editor}/>
     </div>
   );
 };
