@@ -1,12 +1,12 @@
 "use client";
-import Tiptap from "@/components/tiptap";
+import Tiptap from "@/components/tiptap-markdown";
 import { useState } from "react";
 
 const ParentComponent = () => {
   const [content, setContent] = useState<string>("");
 
   const handleEditorChange = (newContent: string) => {
-    setContent(newContent); 
+    setContent(newContent);
     console.log("Updated Content: ", newContent);
   };
 

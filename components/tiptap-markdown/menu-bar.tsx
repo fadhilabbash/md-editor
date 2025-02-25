@@ -15,6 +15,7 @@ import {
   Quote,
   ListOrdered,
   List,
+  Highlighter,
 } from "lucide-react";
 import { Editor } from "@tiptap/react";
 import { Separator } from "@/components/ui/separator";
@@ -29,7 +30,7 @@ const MenuBar = ({ editor }: MenuBarProps) => {
   return (
     <div className="flex items-start mb-2">
       <ToggleGroup type="multiple" className="flex gap-1 ">
-      <ToggleGroupItem
+        <ToggleGroupItem
           value="blockquote"
           onClick={() => editor?.chain().focus().toggleBlockquote().run()}
           aria-label="Blockquote"
@@ -46,7 +47,7 @@ const MenuBar = ({ editor }: MenuBarProps) => {
           <Code className="w-5 h-5" />
         </ToggleGroupItem>
         <Separator orientation="vertical" className="h-8 m-2 " />
-        
+
         <ToggleGroupItem
           value="unordered-list"
           onClick={() => editor?.chain().focus().toggleBulletList().run()}
@@ -62,16 +63,9 @@ const MenuBar = ({ editor }: MenuBarProps) => {
           variant="outline"
         >
           <ListOrdered className="w-5 h-5" />
-        </ToggleGroupItem> 
-        <Separator orientation="vertical" className="h-8 m-2 " />
-        <ToggleGroupItem
-          value="bold"
-          onClick={() => editor?.chain().focus().toggleBold().run()}
-          aria-label="Bold"
-          variant="outline"
-        >
-          <Bold className="w-5 h-5" />
         </ToggleGroupItem>
+        <Separator orientation="vertical" className="h-8 m-2 " />
+
         <ToggleGroupItem
           value="italic"
           onClick={() => editor?.chain().focus().toggleItalic().run()}
@@ -80,6 +74,15 @@ const MenuBar = ({ editor }: MenuBarProps) => {
         >
           <Italic className="w-5 h-5" />
         </ToggleGroupItem>
+        {/* <ToggleGroupItem
+          value="underline"
+          onClick={() => editor.chain().focus().toggleUnderline().run()}
+          aria-label="Underline"
+          variant="outline"
+        >
+          <Underline className="w-5 h-5" />
+        </ToggleGroupItem> */}
+
         <ToggleGroupItem
           value="strike"
           onClick={() => editor?.chain().focus().toggleStrike().run()}
@@ -88,9 +91,25 @@ const MenuBar = ({ editor }: MenuBarProps) => {
         >
           <Strikethrough className="w-5 h-5" />
         </ToggleGroupItem>
-       
+        <ToggleGroupItem
+          value="highlight"
+          onClick={() => editor.chain().focus().toggleHighlight().run()}
+          aria-label="Highlight"
+          variant="outline"
+        >
+          <Highlighter className="w-5 h-5" />
+        </ToggleGroupItem>
+        <ToggleGroupItem
+          value="bold"
+          onClick={() => editor?.chain().focus().toggleBold().run()}
+          aria-label="Bold"
+          variant="outline"
+        >
+          <Bold className="w-5 h-5" />
+        </ToggleGroupItem>
+
         <Separator orientation="vertical" className="h-8 m-2 " />
-       
+
         <ToggleGroupItem
           value="h1"
           onClick={() =>
@@ -121,7 +140,6 @@ const MenuBar = ({ editor }: MenuBarProps) => {
         >
           <Heading3 className="w-5 h-5" />
         </ToggleGroupItem>
-       
 
         <Separator orientation="vertical" className="h-8 m-2 " />
         <ToggleGroupItem
@@ -161,8 +179,3 @@ const MenuBar = ({ editor }: MenuBarProps) => {
   );
 };
 export default MenuBar;
-
-
-
-
- 

@@ -3,16 +3,17 @@
 import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import { Markdown } from "tiptap-markdown";
-import Highlight from "@tiptap/extension-highlight";
 import Typography from "@tiptap/extension-typography";
 import TextAlign from "@tiptap/extension-text-align";
-import MenuBar from "./menu-bar";
+import MenuBar from "./tiptap-markdown/menu-bar";
+import Highlight from "./tiptap-markdown/extensions/highlight";
+
 
 type TiptapProps = {
   onChange: (content: string) => void;
   initialContent?: string;
 };
-const Tiptap = ({ onChange, initialContent }: TiptapProps) => {
+const TiptapMarkdown = ({ onChange, initialContent }: TiptapProps) => {
   const editor = useEditor({
     extensions: [
       StarterKit,
@@ -39,9 +40,9 @@ const Tiptap = ({ onChange, initialContent }: TiptapProps) => {
   return (
     <div className="border p-2 w-fit rounded-xl">
       <MenuBar editor={editor} />
-      <EditorContent editor={editor}/>
+      <EditorContent editor={editor} />
     </div>
   );
 };
 
-export default Tiptap;
+export default TiptapMarkdown;
