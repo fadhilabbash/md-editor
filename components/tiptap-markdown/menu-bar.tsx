@@ -16,6 +16,7 @@ import {
   ListOrdered,
   List,
   Highlighter,
+  Heading4,
 } from "lucide-react";
 import { Editor } from "@tiptap/react";
 import { Separator } from "@/components/ui/separator";
@@ -139,6 +140,16 @@ const MenuBar = ({ editor }: MenuBarProps) => {
           variant="outline"
         >
           <Heading3 className="w-5 h-5" />
+        </ToggleGroupItem>
+        <ToggleGroupItem
+          value="h4"
+          onClick={() =>
+            editor?.chain().focus().toggleHeading({ level: 4 }).run()
+          }
+          aria-label="H4"
+          variant="outline"
+        >
+          <Heading4 className="w-5 h-5" />
         </ToggleGroupItem>
 
         <Separator orientation="vertical" className="h-8 m-2 " />
