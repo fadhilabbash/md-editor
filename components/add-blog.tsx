@@ -1,9 +1,9 @@
 "use client";
-import TiptapMarkdown from "@/components/tiptap-markdown";
+import TiptapMarkdown, { TiptapRef } from "@/components/tiptap-markdown";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import React, { useActionState } from "react";
+import React, { useActionState, useRef } from "react";
 import { useForm, useInputControl } from "@conform-to/react";
 import { parseWithZod } from "@conform-to/zod";
 
@@ -17,7 +17,6 @@ const AddBlog = () => {
     addBlog,
     undefined
   );
-
   const [form, fields] = useForm({
     lastResult,
     onValidate({ formData }) {
@@ -26,6 +25,7 @@ const AddBlog = () => {
     shouldValidate: "onBlur",
     shouldRevalidate: "onInput",
   });
+  const tiptapRef = useRef<TiptapRef>(null);
 
   const contentControl = useInputControl(fields.content);
 
@@ -58,10 +58,12 @@ const AddBlog = () => {
             defaultValue={fields.content.initialValue}
             className="sr-only"
             tabIndex={-1}
+            onFocus={() => tiptapRef.current?.focusEditor()}
           />
           <div className="grid w-full items-center gap-1.5">
             <Label htmlFor="content">النص</Label>
             <TiptapMarkdown
+              ref={tiptapRef}
               value={contentControl.value}
               onChange={contentControl.change}
             />
