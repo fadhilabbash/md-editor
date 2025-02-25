@@ -36,6 +36,11 @@ const AddBlog = () => {
       },
     
   });
+  const handleContentChange = (newContent:string) => {
+    setContent(newContent);
+    // Trigger conform-to revalidation when content changes
+    form.validate();
+  };
   return (
     <div className="container mx-auto items-center flex justify-center mt-8">
       <form id={form.id} onSubmit={form.onSubmit} action={formAction} noValidate>
@@ -55,7 +60,7 @@ const AddBlog = () => {
 
         <div>
           <Label htmlFor="content">النص</Label>
-          <TiptapMarkdown onChange={} />
+          <TiptapMarkdown onChange={handleContentChange} />
           <div className="text-[12px] text-destructive">
             {fields.content.errors}
           </div>
