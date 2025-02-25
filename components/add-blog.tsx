@@ -10,13 +10,13 @@ import { parseWithZod } from "@conform-to/zod";
 import { addBlog } from "@/services/actions/blog-action";
 import { blogSchema } from "@/lib/schemas";
 import { Loader2 } from "lucide-react";
+import { Textarea } from "./ui/textarea";
 const AddBlog = () => {
-
-    const [lastResult, formAction,isPending] = useActionState(
-        addBlog,
-        undefined,
-      );
-      const [content, setContent] = useState("");
+  const [lastResult, formAction, isPending] = useActionState(
+    addBlog,
+    undefined
+  );
+  const [content, setContent] = useState("");
 
   const [form, fields] = useForm({
     lastResult,
@@ -25,25 +25,16 @@ const AddBlog = () => {
     },
     shouldValidate: "onBlur",
     shouldRevalidate: "onInput",
-    onSubmit: (formData) => {
-       
-        const formDataObj = new FormData();
-        for (const  [key, value] of Object.entries(formData)) {
-          formDataObj.append(key, value);
-        }
-        formDataObj.append("content", content);
-        formAction(formDataObj); 
-      },
-    
   });
-  const handleContentChange = (newContent:string) => {
-    setContent(newContent);
-    // Trigger conform-to revalidation when content changes
-    form.validate();
-  };
+
   return (
     <div className="container mx-auto items-center flex justify-center mt-8">
-      <form id={form.id} onSubmit={form.onSubmit} action={formAction} noValidate>
+      <form
+        id={form.id}
+        onSubmit={form.onSubmit}
+        action={formAction}
+        noValidate
+      >
         <div className="grid w-full items-center gap-1.5">
           <Label htmlFor="title">العنوان</Label>
           <Input
@@ -59,23 +50,33 @@ const AddBlog = () => {
         </div>
 
         <div>
+          <Textarea
+            id="content"
+            key={fields.content.key}
+            name={fields.content.name}
+            defaultValue={content}
+           className="hidden"
+           
+          />
+        </div>
+        <div>
           <Label htmlFor="content">النص</Label>
-          <TiptapMarkdown onChange={handleContentChange} />
+          <TiptapMarkdown onChange={(newContent) => setContent(newContent)} />
           <div className="text-[12px] text-destructive">
             {fields.content.errors}
           </div>
         </div>
         <div className="mt-4">
-        <Button type="submit" disabled={isPending} className="ml-2 mt-2">
-                {isPending ? (
-                  <>
-                    <Loader2 className="animate-spin" />
-                    <span> جار الحفظ..</span>
-                  </>
-                ) : (
-                  "حفظ"
-                )}
-              </Button>
+          <Button type="submit" disabled={isPending} className="ml-2 mt-2">
+            {isPending ? (
+              <>
+                <Loader2 className="animate-spin" />
+                <span> جار الحفظ..</span>
+              </>
+            ) : (
+              "حفظ"
+            )}
+          </Button>
         </div>
       </form>
     </div>

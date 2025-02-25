@@ -13,6 +13,7 @@ export async function addBlog(prevState: unknown, formData: FormData) {
     return submission.reply();
   }
   console.log("Success__", submission.reply());
+  console.log("Formdata___", formData);
   return {
     status: submission.status,
     ...submission.reply({ resetForm: true }),
